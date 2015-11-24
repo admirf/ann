@@ -1,4 +1,4 @@
-package fusion.matrix;
+package com.fusion.matrix;
 
 /**
  * Created by admir on 11/22/2015.
@@ -16,8 +16,8 @@ public class HopfieldNetwork {
         this.matrix = matrix.clone();
     }
 
-    public void train(Matrix vector) throws DimensionsDontMatchException {
-        if(!vector.isVector()) throw new DimensionsDontMatchException();
+    public void train(Matrix vector) throws MatrixException {
+        if(!vector.isVector()) throw new MatrixException();
 
         vector.bin2bip();
 
@@ -26,7 +26,7 @@ public class HopfieldNetwork {
         this.matrix.setDiagonalToZero();
     }
 
-    public void train(String patt) throws DimensionsDontMatchException {
+    public void train(String patt) throws MatrixException {
         Matrix m = new Matrix(patt.length(), 1);
         for(int i = 0;i < patt.length();++i) {
             double ret = (patt.charAt(i) == '0')? 0: 1;
@@ -40,8 +40,8 @@ public class HopfieldNetwork {
         return this.matrix.clone();
     }
 
-    public double[] testPattern(double[] pattern) throws DimensionsDontMatchException {
-        if(pattern.length != this.neurons) throw new DimensionsDontMatchException();
+    public double[] testPattern(double[] pattern) throws MatrixException {
+        if(pattern.length != this.neurons) throw new MatrixException();
 
         double[] result = new double[this.neurons];
 
@@ -72,7 +72,7 @@ public class HopfieldNetwork {
         return str.toString();
     }
 
-    public double[] testPattern(String s) throws DimensionsDontMatchException {
+    public double[] testPattern(String s) throws MatrixException {
         return testPattern(stringToPattern(s));
     }
 

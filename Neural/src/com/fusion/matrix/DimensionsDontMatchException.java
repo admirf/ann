@@ -1,4 +1,4 @@
-package fusion.matrix;
+package com.fusion.matrix;
 
 /**
  * Created by admir on 11/20/2015.
@@ -8,8 +8,8 @@ public class DimensionsDontMatchException extends Exception {
     int xDiff, yDiff;
     public DimensionsDontMatchException() {xDiff = -1; yDiff = -1;}
     public DimensionsDontMatchException(Matrix a, Matrix b) {
-        xDiff = java.lang.Math.abs(a.getCols() - b.getCols());
-        yDiff = java.lang.Math.abs(a.getRows() - b.getRows());
+        xDiff = Math.abs(a.getCols() - b.getCols());
+        yDiff = Math.abs(a.getRows() - b.getRows());
     }
     public int getRowDifference() {return yDiff;}
     public int getColDifference() {return xDiff;}

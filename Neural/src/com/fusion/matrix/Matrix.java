@@ -1,4 +1,4 @@
-package fusion.matrix;
+package com.fusion.matrix;
 
 /**
  * Created by admir on 11/20/2015.
@@ -255,11 +255,11 @@ public class Matrix {
      * @param a first Matrix
      * @param b second Matrix
      * @return Matrix the result of the addition
-     * @throws DimensionsDontMatchException
+     * @throws MatrixException
      */
-    public static Matrix add(Matrix a, Matrix b) throws DimensionsDontMatchException {
+    public static Matrix add(Matrix a, Matrix b) throws MatrixException {
         if(!equalsDim(a, b)) {
-            throw new DimensionsDontMatchException(a, b);
+            throw new MatrixException(a, b);
         }
 
         Matrix result = new Matrix(a.getRows(), a.getCols());
@@ -275,9 +275,9 @@ public class Matrix {
      * Returns a new Matrix
      * @param b
      * @return
-     * @throws DimensionsDontMatchException
+     * @throws MatrixException
      */
-    public Matrix add(Matrix b) throws DimensionsDontMatchException {
+    public Matrix add(Matrix b) throws MatrixException {
         return add(this, b);
     }
 
@@ -286,9 +286,9 @@ public class Matrix {
      * Returns a new Matrix
      * @param b
      * @return
-     * @throws DimensionsDontMatchException
+     * @throws MatrixException
      */
-    public Matrix substract(Matrix b) throws DimensionsDontMatchException {
+    public Matrix substract(Matrix b) throws MatrixException {
         b.multiply(-1.0); // lijen sam za implementacija ovako ako nista lijepo izgleda
         return add(this, b);
     }
@@ -299,8 +299,8 @@ public class Matrix {
      * @param b
      * @return
      */
-    public static Matrix multiply(Matrix a, Matrix b) throws DimensionsDontMatchException {
-        if(a.getRows() != b.getCols() || a.getCols() != b.getRows()) throw new DimensionsDontMatchException();
+    public static Matrix multiply(Matrix a, Matrix b) throws MatrixException {
+        if(a.getRows() != b.getCols() || a.getCols() != b.getRows()) throw new MatrixException();
 
         Matrix result = new Matrix(a.getRows(), b.getCols());
 
@@ -321,9 +321,9 @@ public class Matrix {
      * Multiplies the object with matrix b
      * @param b
      * @return
-     * @throws DimensionsDontMatchException
+     * @throws MatrixException
      */
-    public Matrix multiply(Matrix b) throws DimensionsDontMatchException {
+    public Matrix multiply(Matrix b) throws MatrixException {
         return multiply(this, b);
     }
 
@@ -363,16 +363,16 @@ public class Matrix {
      * @param a
      * @param b
      * @return
-     * @throws DimensionsDontMatchException
+     * @throws MatrixException
      */
-    public static double dotProduct(Matrix a, Matrix b) throws DimensionsDontMatchException {
-        if(!a.isVector() && !b.isVector()) throw new DimensionsDontMatchException();
+    public static double dotProduct(Matrix a, Matrix b) throws MatrixException {
+        if(!a.isVector() && !b.isVector()) throw new MatrixException();
         if(a.getRows() == 1) {
             Matrix tmp = new Matrix(a);
             a = b.clone();
             b = tmp.clone();
         }
-        if(a.getRows() != b.getCols()) throw new DimensionsDontMatchException();
+        if(a.getRows() != b.getCols()) throw new MatrixException();
 
         double result = 0;
 
@@ -387,7 +387,7 @@ public class Matrix {
      * @param b
      * @return
      */
-    public double dotProduct(Matrix b) throws DimensionsDontMatchException {
+    public double dotProduct(Matrix b) throws MatrixException {
         return dotProduct(this, b);
     }
 
