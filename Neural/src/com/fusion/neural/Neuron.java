@@ -16,18 +16,32 @@ import java.util.List;
 public class Neuron {
 
     private double received;
+    IActivator activator;
     private List<Synapse> outgoing;
-    private double threshold;
+
+    private void initVars() {
+        this.received = 0;
+        this.outgoing = new ArrayList<>();
+    }
 
     /**
-     * Constructor takes a threshold as parameter
+     * Constructor takes an Activator as parameter
+     * @param activator a class that implements an activator
+     */
+    public Neuron(IActivator activator) {
+        this.activator = activator;
+        initVars();
+    }
+
+    /**
+     * Constructor for simple Threshold activation
      * @param threshold
      */
     public Neuron(double threshold) {
-        this.received = 0;
-        this.threshold = threshold;
-        this.outgoing = new ArrayList<>();
+        this.activator = new ThresholdActivator(threshold);
+        initVars();
     }
+
 
     /**
      * appends a signal to the current received value
@@ -54,15 +68,32 @@ public class Neuron {
     }
 
     /**
+     * returns the Activator implementation used by the neuron
+     * @return
+     */
+    public IActivator getActivator() {
+        return activator;
+    }
+
+    /**
+     * sets the current Activator implementation
+     * @param activator
+     */
+    public void setActivator(IActivator activator) {
+        this.activator = activator;
+    }
+
+    /**
      * Sends a signal if the current received value is higher than the threshold
      */
     public void send() {
-        if(this.received > this.threshold) {
-            for (Synapse synapse : outgoing) {
-                double w = this.received * synapse.getWeight();
-                synapse.getDest().receive(w);
-            }
+       // if(this.received > this.threshold) {
+        // if(this.received < this.threshold) this.received = 0;
+        for (Synapse synapse : outgoing) {
+            double w = activator.activate(this.received) * synapse.getWeight();
+            synapse.getDest().receive(w);
         }
+       // }
     }
 
     /**
@@ -74,26 +105,11 @@ public class Neuron {
     }
 
     /**
-     * Constructor which sets the threshold automatically to 0, useful for input neurons
+     * Constructor which sets the activator to the default activator(sigmoid)
      */
     public Neuron() {
-        this(0);
-    }
-
-    /**
-     * Returns the threshold of the neuron
-     * @return
-     */
-    public double getThreshold() {
-        return threshold;
-    }
-
-    /**
-     * Sets the threshold of the neuron
-     * @param threshold
-     */
-    public void setThreshold(double threshold) {
-        this.threshold = threshold;
+        this.activator = new SigmoidActivator();
+        initVars();
     }
 
     /**
