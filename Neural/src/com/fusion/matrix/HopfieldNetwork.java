@@ -2,6 +2,7 @@ package com.fusion.matrix;
 
 /**
  * Created by admir on 11/22/2015.
+ * Simple Hopfield neural network implementation
  */
 public class HopfieldNetwork {
     private Matrix matrix;

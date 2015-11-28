@@ -20,8 +20,8 @@ public class NeuralUtil {
      * @throws NeuralException
      */
     public static Network createXOR() throws NeuralException {
-        Neuron in1 = new Neuron();
-        Neuron in2 = new Neuron();
+        Neuron in1 = new Neuron(0);
+        Neuron in2 = new Neuron(0);
 
         Neuron hid1 = new Neuron(1.5);
         Neuron hid2 = new Neuron(0.5);

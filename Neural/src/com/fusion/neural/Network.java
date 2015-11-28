@@ -192,7 +192,6 @@ public class Network {
         StringBuilder str = new StringBuilder();
 
         for(Neuron n: inputLayer.getNeurons()) {
-            str.append(n.getThreshold() + ": ");
             for(Synapse s: n.getSynapses()) {
                 str.append(s.getWeight() + " ");
             }
@@ -201,7 +200,6 @@ public class Network {
 
         for(Layer l: hiddenLayers) {
             for(Neuron n: l.getNeurons()) {
-                str.append(n.getThreshold() + ": ");
                 for(Synapse s: n.getSynapses()) {
                     str.append(s.getWeight() + " ");
                 }
@@ -210,7 +208,6 @@ public class Network {
         }
 
         for(Neuron n: outputLayer.getNeurons()) {
-            str.append(n.getThreshold() + ": ");
             for(Synapse s: n.getSynapses()) {
                 str.append(s.getWeight() + " ");
             }

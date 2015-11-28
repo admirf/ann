@@ -22,6 +22,8 @@ public class Driver {
             // 0 xor 0 ocekivano 0
             result = NeuralUtil.binaryResultToString(xor.evaulate(new double[]{0, 0}));
             System.out.println(result);
+            // testing sigmoid function 0.5 expected
+            System.out.println(new SigmoidActivator().activate(0));
         }
         catch(NeuralException e) {
             System.out.println(e.getError());
