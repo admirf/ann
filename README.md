@@ -1,2 +1,2 @@
-# tvojastara
+# ANN
 OCR Education Project
